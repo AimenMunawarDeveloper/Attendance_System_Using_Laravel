@@ -37,6 +37,11 @@
                                     <td class="py-2 px-4 border-b">{{ $class->starttime }}</td>
                                     <td class="py-2 px-4 border-b">{{ $class->endtime }}</td>
                                     <td class="py-2 px-4 border-b">{{ $class->credit_hours }}</td>
+                                    <td>
+                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#attendanceModal" >
+                                    <a href="{{ route('classes.displayEnrolledStudents', ['classid' => $class->id]) }}">Mark Attendance for the Class</a>
+                                </button>
+                            </td>  
                                 </tr>
                             @endforeach
                         </tbody>

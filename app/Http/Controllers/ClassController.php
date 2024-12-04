@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Models\ClassModel;
+use App\Models\ClassStudent;
 use Illuminate\Http\Request;
 use Validator;
 class ClassController extends Controller
@@ -35,4 +36,12 @@ class ClassController extends Controller
             return redirect()->route('classes.DisplayAllClasses')->with('success', 'You have been enrolled in the class');
         }
     }   
+    public function displayStudentsEnrolledInAClass($classid){
+        $class = ClassModel::find($classid);
+        if (!$class) {
+            return redirect()->route('classes.DisplayAllClasses')->with('error', 'Class not found');
+        }
+        $students = $class->students;  
+        return view('classes.displayStudentsInAClass', compact('students'));
+    }
 }
