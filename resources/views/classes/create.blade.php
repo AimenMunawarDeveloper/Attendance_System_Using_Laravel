@@ -5,11 +5,7 @@
         <h1>Create Class</h1>
         <form action="{{ route('classes.store') }}" method="POST" class="shadow-lg" style="background-color: #1D4ED8;height: 40vh;color:white;padding:10px">
             @csrf
-            <div class="mb-3">
-                <label for="teacherid" class="form-label">Teacher ID</label>
-                <input type="number" name="teacherid" id="teacherid" class="form-control" style="color: #000;" value="{{ old('teacherid') }}" required>
-                @error('teacherid') <div class="text-danger">{{ $message }}</div> @enderror
-            </div>
+            <input type="hidden" name="teacherid" value="{{ auth()->user()->id }}">
             <div class="mb-3">
                 <label for="classname" class="form-label">Class Name</label>
                 <input type="text" name="classname" id="classname" class="form-control" style="color: #000;" value="{{ old('classname') }}" required>
