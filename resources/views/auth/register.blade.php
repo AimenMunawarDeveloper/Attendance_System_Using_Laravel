@@ -44,7 +44,6 @@
             <select id="role" name="role" class="block mt-1 w-full" required>
                 <option value="teacher" {{ old('role') == 'teacher' ? 'selected' : '' }}>Teacher</option>
                 <option value="student" {{ old('role') == 'student' ? 'selected' : '' }}>Student</option>
-                <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
             </select>
             <x-input-error :messages="$errors->get('role')" class="mt-2" />
         </div>

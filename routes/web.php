@@ -13,7 +13,7 @@ Route::get('/dashboard/classes/create', [\App\Http\Controllers\ClassController::
 Route::post('/classes',[\App\Http\Controllers\ClassController::class,'store'])->name('classes.store');
 
 // routes for student
-Route::get('/studentDashboard', [\App\Http\Controllers\StudentController::class, 'index'])
+Route::get('/studentDashboard', [\App\Http\Controllers\DisplayClassesController::class, 'showStudentEnrolledClasses'])
     ->middleware(['auth', 'verified'])
     ->name('student.dashboard'); // for student dashboard
 Route::get('/studentDashboard/classes/displayClasses', [\App\Http\Controllers\ClassController::class, 'DisplayAllClasses'])->name('classes.DisplayAllClasses');
