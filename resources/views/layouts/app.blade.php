@@ -29,7 +29,17 @@
 
             <!-- Page Content -->
             <main>
-            @yield('content')
+                @if(session('success'))
+                <div class="alert alert-success bg-green-500 text-white p-4 mb-4 rounded-md">
+                    {{ session('success') }}
+                </div>
+                @endif
+                @if(session('error'))
+                <div class="alert alert-error bg-red-500 text-white p-4 mb-4 rounded-md">
+                    {{ session('error') }}
+                </div>
+                @endif
+                @yield('content')
             </main>
         </div>
     </body>

@@ -33,7 +33,11 @@ class ClassController extends Controller
             return redirect()->route('classes.DisplayAllClasses')->with('error', 'Class not found');
         }
         $student = auth()->user();
-        $student->student()->attach($classid);
-        return redirect()->route('classes.DisplayAllClasses')->with('success', 'You have been enrolled in the class');
+        if ($student->student->contains($classid)) {
+            return redirect()->route('classes.DisplayAllClasses')->with('error', 'You are already registered in this class');
+        }else{
+            $student->student()->attach($classid);
+            return redirect()->route('classes.DisplayAllClasses')->with('success', 'You have been enrolled in the class');
+        }
     }   
 }
