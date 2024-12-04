@@ -2,7 +2,9 @@
 namespace App\Http\Controllers;
 use App\Models\ClassModel;
 use App\Models\ClassStudent;
+use App\Models\Attendance;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Validator;
 class ClassController extends Controller
 {
@@ -42,6 +44,33 @@ class ClassController extends Controller
             return redirect()->route('classes.DisplayAllClasses')->with('error', 'Class not found');
         }
         $students = $class->students;  
-        return view('classes.displayStudentsInAClass', compact('students'));
+        return view('classes.displayStudentsInAClass',compact('students', 'classid'));
+    }
+    public function saveAttendance(Request $request, $classid)
+    {
+        $class = ClassModel::find($classid);
+        if (!$class) {
+            return redirect()->route('classes.DisplayAllClasses')->with('error', 'Class not found');
+        }
+        if ($request->has('attendance')) {
+            foreach ($request->attendance as $studentid => $isPresent) {
+                $attendance = Attendance::where('classid', $classid)
+                                        ->where('studentid', $studentid)
+                                        ->first();
+                if ($attendance) {
+                    $attendance->isPresent = $isPresent ? 1 : 0;
+                    $attendance->date = Carbon::now(); 
+                    $attendance->save(); 
+                } else {
+                    $attendance = new Attendance();
+                    $attendance->classid = $classid;
+                    $attendance->studentid = $studentid;
+                    $attendance->isPresent = $isPresent ? 1 : 0; 
+                    $attendance->date = Carbon::now();
+                    $attendance->save(); 
+                }
+            }
+        }
+        return redirect()->route('dashboard')->with('success', 'Attendance saved successfully');
     }
 }

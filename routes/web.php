@@ -12,6 +12,7 @@ Route::get('/dashboard', [\App\Http\Controllers\DisplayClassesController::class,
 Route::get('/dashboard/classes/create', [\App\Http\Controllers\ClassController::class, 'create'])->name('classes.create');
 Route::post('/classes',[\App\Http\Controllers\ClassController::class,'store'])->name('classes.store');
 Route::get('/dashboard/classes/displaystudentsenrolled/{classid}', [\App\Http\Controllers\ClassController::class, 'displayStudentsEnrolledInAClass'])->name('classes.displayEnrolledStudents');
+Route::post('/attendance/{classid}/save', [\App\Http\Controllers\ClassController::class, 'saveAttendance'])->name('attendance.save');
 
 // routes for student
 Route::get('/studentDashboard', [\App\Http\Controllers\DisplayClassesController::class, 'showStudentEnrolledClasses'])
