@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 // routes for teacher
@@ -16,7 +16,7 @@ Route::post('/classes',[\App\Http\Controllers\ClassController::class,'store'])->
 Route::get('/studentDashboard', [\App\Http\Controllers\DisplayClassesController::class, 'showStudentEnrolledClasses'])
     ->middleware(['auth', 'verified'])
     ->name('student.dashboard'); // for student dashboard
-Route::get('/studentDashboard/classes/displayClasses', [\App\Http\Controllers\ClassController::class, 'DisplayAllClasses'])->name('classes.DisplayAllClasses');
+Route::get('/studentDashboard/classes/displayClasses', [\App\Http\Controllers\DisplayClassesController::class, 'DisplayAllClasses'])->name('classes.DisplayAllClasses');
 Route::get('/studentDashboard/classes/enroll/{classid}', [\App\Http\Controllers\ClassController::class, 'enroll'])->name('classes.enroll');
 
 // we are not handling these routes right now

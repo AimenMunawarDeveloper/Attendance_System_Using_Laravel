@@ -21,11 +21,6 @@ class ClassController extends Controller
         ClassModel::create($validatedData);// automatically maps key in validated data to columns in classes table
         return redirect()->route('dashboard')->with('success',"class created successfully");
     }
-    // to display all classes for student
-    public function DisplayAllClasses(){
-        $classes=ClassModel::all();
-        return view("classes.displayClasses",compact('classes'));
-    }
     public function enroll($classid)
     {
         $class = ClassModel::find($classid);
