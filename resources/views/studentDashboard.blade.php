@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -14,13 +13,34 @@
                     Enroll in a Class
                 </a>
             </div>
-            <!-- Container for classes -->
+            <div class="container mt-8">
+                <h2 class="text-xl font-bold mb-4 text-white">Your Attendance Progress</h2>
+                @php
+                    // Calculate the total number of classes and attended classes
+                    $totalClasses = $classes->count();
+                    $attendedClasses = $classes->filter(function($class) {
+                        return $class->attendance_status == 'Present';
+                    })->count();
+
+                    // Calculate the attendance percentage
+                    $attendancePercentage = $totalClasses > 0 ? ($attendedClasses / $totalClasses) * 100 : 0;
+                @endphp
+                <div class="w-full max-w-sm rounded-full h-6">
+                    <div class="h-6 rounded-full flex items-center justify-center text-white text-sm" style="width: {{ $attendancePercentage }}%; background-color: 
+                        @if($attendancePercentage < 75) red 
+                        @elseif($attendancePercentage >= 75 && $attendancePercentage < 85) yellow 
+                        @else green 
+                        @endif">
+                        {{ round($attendancePercentage, 2) }}%
+                    </div>
+                </div>
+                <p class="text-white mt-2">Attendance: {{ round($attendancePercentage, 2) }}%</p>
+            </div>
             <div class="container mt-8">
                 <h1 class="text-2xl font-bold mb-4 text-white">Your Classes</h1>
                 @if($classes->isEmpty())
                     <p>You haven't created any classes yet.</p>
                 @else
-                    <!-- Table for displaying classes -->
                     <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
                         <thead>
                             <tr>
@@ -28,6 +48,7 @@
                                 <th class="py-2 px-4 border-b text-left">Start Time</th>
                                 <th class="py-2 px-4 border-b text-left">End Time</th>
                                 <th class="py-2 px-4 border-b text-left">Credit Hours</th>
+                                <th class="py-2 px-4 border-b text-left">Attendance</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,6 +58,13 @@
                                     <td class="py-2 px-4 border-b">{{ $class->starttime }}</td>
                                     <td class="py-2 px-4 border-b">{{ $class->endtime }}</td>
                                     <td class="py-2 px-4 border-b">{{ $class->credit_hours }}</td>
+                                    <td class="py-2 px-4 border-b">
+                                        @if(isset($class->attendance_status))
+                                            {{ $class->attendance_status }}
+                                        @else
+                                            No Record
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

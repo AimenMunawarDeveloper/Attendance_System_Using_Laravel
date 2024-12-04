@@ -21,8 +21,12 @@ class DisplayClassesController extends Controller
     // to display the classes in which a student is enrolled
     public function showStudentEnrolledClasses()
     {
-        $user = auth()->user(); // getting currently logged in user
-        $classes = $user->student; // get all classes created by user
+        $user = auth()->user(); 
+        $classes = $user->student()->with('attendances')->get();
+        foreach ($classes as $class) {
+            $attendance = $class->attendances->where('studentid', $user->id)->first();
+            $class->attendance_status = $attendance ? ($attendance->isPresent ? 'Present' : 'Absent') : 'No Record';
+        }
         return view('studentDashboard', compact('classes'));
     }
 }
