@@ -26,7 +26,7 @@
                     $attendancePercentage = $totalClasses > 0 ? ($attendedClasses / $totalClasses) * 100 : 0;
                 @endphp
                 <div class="w-full max-w-sm rounded-full h-6">
-                    <div class="h-6 rounded-full flex items-center justify-center text-white text-sm" style="width: {{ $attendancePercentage }}%; background-color: 
+                    <div class="h-6 rounded-full flex items-center justify-center text-white text-sm font-bold" style="width: {{ $attendancePercentage }}%; background-color: 
                         @if($attendancePercentage < 75) red 
                         @elseif($attendancePercentage >= 75 && $attendancePercentage < 85) yellow 
                         @else green 
@@ -34,7 +34,7 @@
                         {{ round($attendancePercentage, 2) }}%
                     </div>
                 </div>
-                <p class="text-white mt-2">Attendance: {{ round($attendancePercentage, 2) }}%</p>
+                <p class="text-white font-bold mt-2">Attendance: {{ round($attendancePercentage, 2) }}%</p>
             </div>
             <div class="container mt-8">
                 <h1 class="text-2xl font-bold mb-4 text-white">Your Classes</h1>
