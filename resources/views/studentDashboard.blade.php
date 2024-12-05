@@ -9,7 +9,7 @@
             </div>
             <h1 class="text-white" style="margin-top: 20px;">Hello Student!</h1>
             <div style="display: flex; justify-content: center; margin-top: 50px;">
-                <a href="{{ route('classes.DisplayAllClasses') }}" class="px-6 py-4 text-white rounded-md text-lg" style="background:#1D4ED8">
+                <a href="{{ route('classes.DisplayAllClasses') }}" class="px-6 py-4 text-white rounded-md text-lg dark:bg-gray-700" >
                     Enroll in a Class
                 </a>
             </div>

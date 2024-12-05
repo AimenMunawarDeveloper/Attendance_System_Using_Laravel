@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div style="display: flex; justify-content: center; margin-top: 50px;">
-                <a href="{{ route('classes.create') }}" class="px-6 py-4 text-white rounded-md text-lg" style="background:#1D4ED8">
+                <a href="{{ route('classes.create') }}" class="px-6 py-4 text-white rounded-md text-lg dark:bg-gray-700">
                     Create Class
                 </a>
             </div>
@@ -39,7 +39,7 @@
                                     <td class="py-2 px-4 border-b">{{ $class->credit_hours }}</td>
                                     <td>
                                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#attendanceModal" >
-                                    <a href="{{ route('classes.displayEnrolledStudents', ['classid' => $class->id]) }}">Mark Attendance for the Class</a>
+                                    <a href="{{ route('classes.displayEnrolledStudents', ['classid' => $class->id]) }}" class="dark:bg-gray-700 rounded text-white" style="padding:10px">Mark Attendance for the Class</a>
                                 </button>
                             </td>  
                                 </tr>

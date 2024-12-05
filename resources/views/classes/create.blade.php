@@ -1,9 +1,12 @@
 @extends('layouts.app')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 @section('content')
 <div class="container d-flex justify-content-center align-items-center" style="background-color: #f8f9fa; height: 100vh; padding: 80px;">
-    <div class="w-100" style="max-width: 600px;">
+<button class="mb-4"><a href="{{ route('dashboard') }}"><i class="fa fa-angle-left fa-lg"></i></a></button>
+    <div class="w-100 h-100 dark:bg-gray-700 text-white" style="padding:10px;max-width:600px">
+
         <h1>Create Class</h1>
-        <form action="{{ route('classes.store') }}" method="POST" class="shadow-lg" style="background-color: #1D4ED8;height: 40vh;color:white;padding:10px">
+        <form action="{{ route('classes.store') }}" method="POST" class="shadow-lg" style="padding: 10px;">
             @csrf
             <input type="hidden" name="teacherid" value="{{ auth()->user()->id }}">
             <div class="mb-3">
@@ -19,7 +22,7 @@
             </div>
             <div class="mb-3">
                 <label for="endtime" class="form-label">End Time</label>
-                <input type="time" name="endtime" id="endtime" class="form-control" style="color: #000;" value="{{ old('endtime') }}" required>
+                <input type="time" name="endtime" id="endtime" class="form-control " style="color: #000;" value="{{ old('endtime') }}" required>
                 @error('endtime') <div class="text-danger">{{ $message }}</div> @enderror
             </div>
             <div class="mb-3">
@@ -27,7 +30,7 @@
                 <input type="number" name="credit_hours" id="credit_hours" class="form-control" style="color: #000;" value="{{ old('credit_hours') }}" required>
                 @error('credit_hours') <div class="text-danger">{{ $message }}</div> @enderror
             </div>
-            <button type="submit" class="btn btn-primary">Create Class</button>
+            <button type="submit" class="btn dark:bg-gray-200 rounded text-black" style="padding:10px;margin:10px">Create Class</button>
         </form>
     </div>
 </div>
